@@ -1,7 +1,7 @@
 import collections
 import numpy as np
 import scipy.stats as stat
-from scipy.stats import iqr
+from scipy.stats import iqr as IQR
 
 def Q3(x, axis = None):
     return np.percentile(x, 25, axis = axis)
@@ -39,3 +39,6 @@ def IQR_outlier(x, axis = None, bar = 1.5, side = 'both'):
     if side == 'both':
         return np.logical_or(upper_outlier, lower_outlier)
 
+#test
+x = [2,3,1,4,2,3,4,5,2,3,3,3,3,4,3,2,50,60] #data
+IQR_outlier(np.asarray(x), axis = 0, bar = 1.5, side = 'both') #call function using numpy array
