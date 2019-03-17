@@ -27,7 +27,7 @@ This method will test if the value is less than q1 - 1.5 * iqr or
 greater than q3 + 1.5 * iqr.
 ''' 
     
-def Q3(x, axis = None):
+def Q1(x, axis = None):
     return np.percentile(x, 25, axis = axis)
 
 def Q3(x, axis = None):
@@ -37,7 +37,7 @@ def IQR_outlier(x, axis = None, bar = 1.5, side = 'both'):
     assert side in ['gt', 'lt', 'both'], 'Side should be `gt`, `lt` or `both`.'
 
     d_IQR = IQR(x, axis = axis)
-    d_Q3 = Q3(x, axis = axis)
+    d_Q1 = Q1(x, axis = axis)
     d_Q3 = Q3(x, axis = axis)
     IQR_distance = np.multiply(d_IQR, bar)
 
@@ -53,7 +53,7 @@ def IQR_outlier(x, axis = None, bar = 1.5, side = 'both'):
         upper_range = d_Q3 + IQR_distance
         upper_outlier = np.greater(x - upper_range.reshape(stat_shape), 0)
     if side in ['lt', 'both']:
-        lower_range = d_Q3 - IQR_distance
+        lower_range = d_Q1 - IQR_distance
         lower_outlier = np.less(x - lower_range.reshape(stat_shape), 0)
 
     if side == 'gt':
